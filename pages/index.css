@@ -10,3 +10,140 @@
 @import url(../blocks/profile/__occupation/profile__occupation.css);
 @import url(../blocks/profile/__change-info/profile__change-info.css);
 @import url(../blocks/profile/__add-picture/profile__add-picture.css);
+@import url(../blocks/photo-grid/photo-grid.css);
+@import url(../blocks/photo-grid/__element/photo-grid__element.css);
+@import url(../blocks/photo-grid/__photo/photo-grid__photo.css);
+@import url(../blocks/photo-grid/__info/photo-grid__info.css);
+@import url(../blocks/photo-grid/__title/photo-grid__title.css);
+@import url(../blocks/photo-grid/__like/photo-grid__like.css);
+@import url(../blocks/footer/footer.css);
+@import url(../blocks/footer/__copyright/footer__copyright.css);
+
+.popup {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding-top: 195px;
+}
+
+@media screen and (max-width: 630px) {
+  .popup {
+    padding-top: 123px;
+  }
+}
+
+.popup__container {
+  width: 430px;
+  background: #FFFFFF;
+  box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.15);
+  border-radius: 10px;
+  margin: auto;
+  color: #000;
+  position: relative;
+  padding-bottom: 37px;
+}
+
+@media screen and (max-width: 630px) {
+  .popup__container {
+    width: 282px;
+    padding-bottom: 25px;
+  }
+}
+
+.popup__close{
+  position: absolute;
+  left: 438px;
+  top: -40px;
+  background-image: url(../images/close-popup.svg);
+  width: 32px;
+  height: 32px;
+  background-color: transparent;
+  background-position: center;
+  background-repeat: no-repeat;
+  cursor: pointer;
+  border: none;
+}
+
+@media screen and (max-width: 630px) {
+  .popup__close{
+    width: 20px;
+    height: 20px;
+    left: 263px;
+    top: -36px;
+    background-size: cover;
+  }
+}
+
+.popup__title{
+  font-weight: 900;
+  font-size: 24px;
+  line-height: 29px;
+  margin: 0;
+  padding: 34px 0 54px 36px;
+}
+
+@media screen and (max-width: 630px) {
+  .popup__title{
+    font-size: 18px;
+    line-height: 22px;
+    padding: 25px 17px 75px;
+  }
+}
+
+.form__personal-info {
+  display: flex;
+  flex-direction: column;
+  border: none;
+  gap: 30px;
+}
+
+.info {
+  border: none;
+  border-bottom: 1px rgba(0, 0, 0, 0.2) solid;
+  width: 358px;
+  margin: auto;
+  padding-bottom: 13px;
+  min-height: 27px;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 17px;
+  display: block;
+}
+
+@media screen and (max-width: 630px) {
+  .info{
+    width: 238px;
+  }
+}
+
+.form__save {
+width: 358px;
+height: 50px;
+background: #000000;
+border-radius: 2px;
+font-weight: normal;
+font-size: 18px;
+line-height: 22px;
+text-align: center;
+color: #FFFFFF;
+border: none;
+margin: auto;
+display: block;
+cursor: pointer;
+}
+
+@media screen and (max-width: 630px) {
+  .form__save {
+    width: 238px;
+    height: 46px;
+    font-size: 14px;
+    line-height: 17px;
+  }
+}
+
+.form__personal-info {
+  padding-bottom: 48px;
+}

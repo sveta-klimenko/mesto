@@ -1,0 +1,7 @@
+.form__personal-info {
+  display: flex;
+  flex-direction: column;
+  border: none;
+  gap: 30px;
+  padding-bottom: 48px;
+}
