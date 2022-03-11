@@ -12,7 +12,11 @@
   border: none;
 }
 
-@media screen and (max-width: 630px) {
+.popup__close:hover {
+  background-image: url(../../../images/close-popup-hover.svg);
+}
+
+@media screen and (max-width: 690px) {
   .popup__close {
     width: 20px;
     height: 20px;

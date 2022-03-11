@@ -6,3 +6,7 @@
   margin-right: 30px;
   cursor: pointer;
 }
+
+.photo-grid__like:hover {
+  background-image: url(../../../images/heart-hover.svg);
+}

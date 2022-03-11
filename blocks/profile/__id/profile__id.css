@@ -2,11 +2,11 @@
   display: flex;
   padding-left: 30px;
   flex-direction: column;
-  gap: 16px; 
+  gap: 16px;
   justify-content: center;
 }
 
-@media screen and (max-width: 630px) {
+@media screen and (max-width: 690px) {
   .profile__id {
     padding: 0;
     gap: 14px;

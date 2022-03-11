@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,7 +9,9 @@
 </head>
 <body class="page">
   <header class="header">
-    <img class="header__logo" src="./images/logo-white.svg" alt="Логотип: Место">
+    <h1>
+      <img class="header__logo" src="./images/logo-white.svg" alt="Логотип: Место">
+    </h1>
   </header>
   <main class="content">
 
@@ -17,12 +19,8 @@
       <div class="profile__info">
         <img src="./images/kusto.jpg" class="profile__avatar" alt="Улыбающийся Жак-Ив Кусто в красной шапке">
         <div class="profile__id">
-          <p class="profile__name">
-            Жак-Ив Кусто
-          </p>
-          <p class="profile__occupation">
-            Исследователь океана
-          </p>
+          <p class="profile__name">Жак-Ив Кусто</p>
+          <p class="profile__occupation">Исследователь океана</p>
         </div>
         <button class="profile__change-info" aria-label="Сменить информацию в профиле"></button>
       </div>
@@ -32,42 +30,42 @@
     <section class="photos">
       <ul class="photo-grid">
         <li class="photo-grid__element">
-         <img class="photo-grid__photo" src="./images/karachaevsk.jpg" alt="карачаевск">
+         <img class="photo-grid__photo" src="./images/karachaevsk.jpg" alt="Полуразрушенная церковь на фоне лесистого склона">
          <div class="photo-grid__info">
           <p class="photo-grid__title">Карачаевск</p>
           <div class="photo-grid__like"></div>
          </div>
         </li>
         <li class="photo-grid__element">
-          <img class="photo-grid__photo" src="./images/elbrus.jpg" alt="карачаевск">
+          <img class="photo-grid__photo" src="./images/elbrus.jpg" alt="Поле, очертания горы и закат">
           <div class="photo-grid__info">
            <p class="photo-grid__title">Гора Эльбрус</p>
            <div class="photo-grid__like"></div>
           </div>
         </li>
         <li class="photo-grid__element">
-          <img class="photo-grid__photo" src="./images/dombay.jpg" alt="карачаевск">
+          <img class="photo-grid__photo" src="./images/dombay.jpg" alt="Лесистые и заснеженные горы">
           <div class="photo-grid__info">
            <p class="photo-grid__title">Домбай</p>
            <div class="photo-grid__like"></div>
           </div>
         </li>
         <li class="photo-grid__element">
-          <img class="photo-grid__photo" src="./images/elbrus.jpg" alt="карачаевск">
+          <img class="photo-grid__photo" src="./images/elbrus.jpg" alt="Поле, очертания горы и закат">
           <div class="photo-grid__info">
            <p class="photo-grid__title">Гора Эльбрус</p>
            <div class="photo-grid__like"></div>
           </div>
         </li>
         <li class="photo-grid__element">
-          <img class="photo-grid__photo" src="./images/dombay.jpg" alt="карачаевск">
+          <img class="photo-grid__photo" src="./images/dombay.jpg" alt="Лесистые и заснеженные горы">
           <div class="photo-grid__info">
            <p class="photo-grid__title">Домбай</p>
            <div class="photo-grid__like"></div>
           </div>
         </li>
         <li class="photo-grid__element">
-          <img class="photo-grid__photo" src="./images/karachaevsk.jpg" alt="карачаевск">
+          <img class="photo-grid__photo" src="./images/karachaevsk.jpg" alt="Полуразрушенная церковь на фоне лесистого склона">
           <div class="photo-grid__info">
            <p class="photo-grid__title">Карачаево-Черкессия</p>
            <div class="photo-grid__like"></div>
@@ -85,15 +83,17 @@
     <div class="popup__container">
       <button class="popup__close" type="button" aria-label="Закрыть попап"></button>
       <h2 class="popup__title">Редактировать профиль</h2>
-      <form class="popup__form">
+      <form class="form">
         <fieldset class="form__personal-info">
           <input type="text" class="info info_name">
           <input type="text" class="info info_description">
         </fieldset>
-        <button type="submit" class="form__save">Сохранить</button>
+        <button class="form__save" type="submit">Сохранить</button>
       </form>
     </div>
   </div>
+
+<script src="./scripts/main.js"></script>
 
 </body>
 </html>

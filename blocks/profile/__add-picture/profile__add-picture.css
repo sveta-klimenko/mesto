@@ -9,6 +9,11 @@
   cursor: pointer;
 }
 
+.profile__add-picture:hover {
+  border: 2px solid rgba(255, 255, 255, 0.8);
+  background-image: url(../../../images/add-picture-hover.svg);
+}
+
 @media screen and (max-width: 630px) {
   .profile__add-picture {
     width: 282px;
