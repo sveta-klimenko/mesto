@@ -12,7 +12,8 @@
 **Использованные технологии**
 
 Проект создан в рамках учебной практики JavaScript.
+Использованы технологии grid-верстки, flexbox, псевдоклассы, JavaScript.
 
 **Ссылка**
 
-TBD
+https://sveta-klimenko.github.io/mesto/

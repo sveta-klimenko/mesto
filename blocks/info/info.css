@@ -11,7 +11,7 @@
   display: block;
 }
 
-@media screen and (max-width: 630px) {
+@media screen and (max-width: 690px) {
   .info {
     width: 238px;
   }

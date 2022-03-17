@@ -7,14 +7,15 @@
   width: 150px;
   height: 50px;
   cursor: pointer;
+  margin: 0 10px 0;
 }
 
 .profile__add-picture:hover {
-  border: 2px solid rgba(255, 255, 255, 0.8);
-  background-image: url(../../../images/add-picture-hover.svg);
+  opacity: 0.6;
+  transition: opacity 0.3s ease-in-out;
 }
 
-@media screen and (max-width: 630px) {
+@media screen and (max-width: 690px) {
   .profile__add-picture {
     width: 282px;
     margin-top: 36px;

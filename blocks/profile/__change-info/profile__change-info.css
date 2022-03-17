@@ -12,8 +12,8 @@
 }
 
 .profile__change-info:hover {
-  border: 1px solid rgba(255, 255, 255, 0.8);
-  background-image: url(../../../images/edit-profile-hover.svg);
+  opacity: 0.6;
+  transition: opacity 0.3s ease-in-out;
 }
 
 @media screen and (max-width: 630px) {
