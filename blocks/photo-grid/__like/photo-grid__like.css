@@ -1,4 +1,6 @@
 .photo-grid__like {
+  border: none;
+  background-color: transparent;
   background-image: url(../../../images/heart-disabled.svg);
   width: 22px;
   height: 19px;
