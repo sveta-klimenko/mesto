@@ -27,48 +27,7 @@
 
     <section class="photos">
       <ul class="photo-grid">
-        <li class="photo-grid__element">
-          <img class="photo-grid__photo" src="./images/karachaevsk.jpg" alt="Полуразрушенная церковь на фоне лесистого склона">
-          <div class="photo-grid__info">
-            <h2 class="photo-grid__title">Карачаевск</h2>
-            <button class="photo-grid__like" aria-label="Добавить изображение в избранные"></button>
-          </div>
-        </li>
-        <li class="photo-grid__element">
-          <img class="photo-grid__photo" src="./images/elbrus.jpg" alt="Поле, очертания горы и закат">
-          <div class="photo-grid__info">
-           <h2 class="photo-grid__title">Гора Эльбрус</h2>
-           <button class="photo-grid__like" aria-label="Добавить изображение в избранные"></button>
-          </div>
-        </li>
-        <li class="photo-grid__element">
-          <img class="photo-grid__photo" src="./images/dombay.jpg" alt="Лесистые и заснеженные горы">
-          <div class="photo-grid__info">
-           <h2 class="photo-grid__title">Домбай</h2>
-           <button class="photo-grid__like" aria-label="Добавить изображение в избранные"></button>
-          </div>
-        </li>
-        <li class="photo-grid__element">
-          <img class="photo-grid__photo" src="./images/elbrus.jpg" alt="Поле, очертания горы и закат">
-          <div class="photo-grid__info">
-           <h2 class="photo-grid__title">Гора Эльбрус</h2>
-           <button class="photo-grid__like" aria-label="Добавить изображение в избранные"></button>
-          </div>
-        </li>
-        <li class="photo-grid__element">
-          <img class="photo-grid__photo" src="./images/dombay.jpg" alt="Лесистые и заснеженные горы">
-          <div class="photo-grid__info">
-           <h2 class="photo-grid__title">Домбай</h2>>
-           <button class="photo-grid__like" aria-label="Добавить изображение в избранные"></button>
-          </div>
-        </li>
-        <li class="photo-grid__element">
-          <img class="photo-grid__photo" src="./images/karachaevsk.jpg" alt="Полуразрушенная церковь на фоне лесистого склона">
-          <div class="photo-grid__info">
-           <h2 class="photo-grid__title">Карачаево-Черкессия</h2>
-           <button class="photo-grid__like" aria-label="Добавить изображение в избранные"></button>
-          </div>
-        </li>
+
       </ul>
     </section>
 
@@ -77,12 +36,12 @@
     <p class="footer__copyright">&#169; 2021 Mesto Russia</p>
   </footer>
 
-  <div class="popup">
+  <div class="popup popup_personal-info">
     <div class="popup__container">
       <button class="popup__close" type="button" aria-label="Закрыть попап"></button>
       <h2 class="popup__title">Редактировать профиль</h2>
-      <form class="form">
-        <fieldset class="form__personal-info">
+      <form class="form form_personal">
+        <fieldset class="form__info">
           <input type="text" class="info info_name">
           <input type="text" class="info info_description">
         </fieldset>
@@ -91,7 +50,40 @@
     </div>
   </div>
 
-<script src="./scripts/main.js"></script>
+  <div class="popup popup_add-picture">
+    <div class="popup__container">
+      <button class="popup__close" type="button" aria-label="Закрыть попап"></button>
+      <h2 class="popup__title">Новое место</h2>
+      <form class="form form_new-image">
+        <fieldset class="form__info">
+          <input type="text" class="info info_place-name" placeholder="Название">
+          <input type="text" class="info info_place-link" placeholder="Ссылка на картинку">
+        </fieldset>
+        <button class="form__save" type="submit">Сохранить</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="popup popup_show-picture">      
+    <div class="popup__image-container">
+      <button class="popup__close" type="button" aria-label="Закрыть попап"></button>
+      <img class="popup__image" src="" alt="">
+      <p class="popup__description"></p>
+    </div>
+  </div>
+
+  <template class="image-card">
+    <li class="photo-grid__element">
+      <img class="photo-grid__photo" src="" alt="">
+      <button class="photo-grid__trash" aria-label="Удалить изображение"></button>
+      <div class="photo-grid__info">
+        <h2 class="photo-grid__title"></h2>
+        <button class="photo-grid__like" aria-label="Добавить изображение в избранные"></button>
+    </div>
+    </li>
+  </template>
+
+  <script src="./scripts/main.js"></script>
 
 </body>
 </html>
