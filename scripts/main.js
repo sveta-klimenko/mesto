@@ -37,6 +37,7 @@ const openAddPicturePopupBtn = document.querySelector('.profile__add-picture')
 //кнопки закрытия попапов
 const closeProfileBtn = popupPersonal.querySelector('.popup__close');
 const closeAddPictureBtn = popupAddPicture.querySelector('.popup__close');
+const closeShowPictureBtn = popupShowPicture.querySelector('.popup__close');
 
 //формы для сохранения
 const popupForm = popupPersonal.querySelector('.form_personal');
@@ -97,8 +98,10 @@ function saveCard(evt) {
   closePopup(popupAddPicture); 
 }
 
-function getImagePopupData(card) {
-  popupImage.scr = card.querySelector('.photo-grid__photo').src;
+function getImagePopupData(data) {
+  popupImage.src = data.link;
+  popupImage.alt = data.name;
+  popupDescription.textContent = data.name;
   openPopup(popupShowPicture);
 }
 
@@ -116,7 +119,7 @@ function createCard(data) {
   })
 
   const imageBtn = card.querySelector('.photo-grid__photo');
-  imageBtn.addEventListener('click', getImagePopupData(card))
+  imageBtn.addEventListener('click', () => getImagePopupData(data));
 
   card.querySelector('.photo-grid__photo').src = data.link;
   card.querySelector('.photo-grid__photo').alt = data.name;
@@ -144,6 +147,9 @@ closeProfileBtn.addEventListener('click', function(){
 })
 closeAddPictureBtn.addEventListener('click', function(){
   closePopup(popupAddPicture);
+})
+closeShowPictureBtn.addEventListener('click', function(){
+  closePopup(popupShowPicture);
 })
 popupForm.addEventListener('submit', saveInfo);
 popupFormImage.addEventListener('submit', saveCard);
