@@ -1,30 +1,3 @@
-const initialCards = [
-  {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-];
-
 //попапы
 const popupPersonal = document.querySelector('.popup_personal-info');
 const popupAddPicture = document.querySelector('.popup_add-picture');
@@ -40,7 +13,7 @@ const closeAddPictureBtn = popupAddPicture.querySelector('.popup__close');
 const closeShowPictureBtn = popupShowPicture.querySelector('.popup__close');
 
 //формы для сохранения
-const popupForm = popupPersonal.querySelector('.form_personal');
+const popupProfileForm = popupPersonal.querySelector('.form_personal');
 const popupFormImage = popupAddPicture.querySelector('.form_new-image');
 
 //персональная информация на странице
@@ -95,6 +68,7 @@ function saveCard(evt) {
   };
   const newCard = createCard(newInfo);
   photoGrid.prepend(newCard);
+  popupFormImage.reset()
   closePopup(popupAddPicture); 
 }
 
@@ -151,6 +125,6 @@ closeAddPictureBtn.addEventListener('click', function(){
 closeShowPictureBtn.addEventListener('click', function(){
   closePopup(popupShowPicture);
 })
-popupForm.addEventListener('submit', saveInfo);
+popupProfileForm.addEventListener('submit', saveInfo);
 popupFormImage.addEventListener('submit', saveCard);
 

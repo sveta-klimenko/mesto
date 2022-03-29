@@ -1,6 +1,7 @@
 .form__info {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   border: none;
   gap: 30px;
   padding: 0 0 48px;
