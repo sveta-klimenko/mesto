@@ -1,4 +1,5 @@
 //попапы
+const popups = document.querySelectorAll('.popup');
 const popupPersonal = document.querySelector('.popup_personal-info');
 const popupAddPicture = document.querySelector('.popup_add-picture');
 const popupShowPicture = document.querySelector('.popup_show-picture');
@@ -38,12 +39,27 @@ const photoGrid = document.querySelector('.photo-grid');
 const popupImage = document.querySelector('.popup__image')
 const popupDescription = document.querySelector('.popup__description')
 
+function closeOnEsc (event, popup) {
+  if (event.key === 'Escape') {
+    closePopup(popup);
+  };
+}
+
+function closeOnClick (event, popup) {
+  if (event.target === event.currentTarget) {
+    closePopup(popup);
+  };
+}
 
 function openPopup(popup) {
+  document.addEventListener('keydown', (event) => closeOnEsc(event, popup));
+  popup.addEventListener('click', (event) => closeOnClick(event, popup));
   popup.classList.add('popup__opened');
 }
 
 function closePopup(popup) {
+  document.removeEventListener('keydown', (event) => closeOnEsc(event, popup));
+  popup.removeEventListener('click', (event) => closeOnClick(event, popup));
   popup.classList.remove('popup__opened');
 }
 
@@ -125,6 +141,7 @@ closeAddPictureBtn.addEventListener('click', function(){
 closeShowPictureBtn.addEventListener('click', function(){
   closePopup(popupShowPicture);
 })
+
 popupProfileForm.addEventListener('submit', saveInfo);
 popupFormImage.addEventListener('submit', saveCard);
 

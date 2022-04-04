@@ -31,4 +31,7 @@
 @import url(../blocks/popup/__description/popup__description.css);
 @import url(../blocks/form/__info/form__info.css);
 @import url(../blocks/info/info.css);
+@import url(../blocks/info/_error/info_error.css);
 @import url(../blocks/form/__save/form__save.css);
+@import url(../blocks/form/__save/_inactive/form__save_inactive.css);
+@import url(../blocks/info-error/_active/info-error_active.css);
