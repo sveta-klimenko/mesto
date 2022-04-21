@@ -1,3 +1,7 @@
+import Card from "./Card.js";
+import FormValidator from "./FormValidator.js";
+import { initialCards, validationList } from "./initial-cards.js";
+
 //попапы
 const popupPersonal = document.querySelector(".popup_personal-info");
 const popupAddPicture = document.querySelector(".popup_add-picture");
@@ -101,8 +105,9 @@ function saveCard(evt) {
     name: inputPlaceName.value,
     link: inputPlaceLink.value,
   };
-  const newCard = createCard(newInfo);
-  photoGrid.prepend(newCard);
+  const card = new Card(newInfo, ".image-card");
+  const cardElement = card.generateCard();
+  photoGrid.prepend(cardElement);
   popupFormImage.reset();
   closePopup(popupAddPicture);
 }
@@ -114,33 +119,11 @@ function getImagePopupData(data) {
   openPopup(popupShowPicture);
 }
 
-function createCard(data) {
-  const card = cardTemplate.content.cloneNode(true);
-
-  const likeBtn = card.querySelector(".photo-grid__like");
-  likeBtn.addEventListener("click", function (evt) {
-    evt.target.classList.toggle("photo-grid__like_active");
-  });
-
-  const trashBtn = card.querySelector(".photo-grid__trash");
-  trashBtn.addEventListener("click", function () {
-    trashBtn.closest(".photo-grid__element").remove();
-  });
-
-  const imageBtn = card.querySelector(".photo-grid__photo");
-  imageBtn.addEventListener("click", () => getImagePopupData(data));
-
-  imageBtn.src = data.link;
-  imageBtn.alt = data.name;
-  card.querySelector(".photo-grid__title").textContent = data.name;
-
-  return card;
-}
-
 function getCards(data) {
   data.forEach((place) => {
-    const newCard = createCard(place);
-    photoGrid.append(newCard);
+    const card = new Card(place, ".image-card");
+    const cardElement = card.generateCard();
+    photoGrid.append(cardElement);
   });
 }
 getCards(initialCards);
@@ -166,3 +149,10 @@ btnCloseShowPicture.addEventListener("click", function () {
 
 popupProfileForm.addEventListener("submit", saveInfo);
 popupFormImage.addEventListener("submit", saveCard);
+const profilePopupValidation = new FormValidator(validationList, popupPersonal);
+profilePopupValidation.enableValidation();
+const popupAddPictureValidation = new FormValidator(
+  validationList,
+  popupAddPicture
+);
+popupAddPictureValidation.enableValidation();

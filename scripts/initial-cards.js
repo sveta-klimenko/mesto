@@ -24,3 +24,15 @@ const initialCards = [
     link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg",
   },
 ];
+
+const validationList = {
+  formSelector: ".form",
+  fieldsetSelector: ".form__info",
+  inputSelector: ".info",
+  submitButtonSelector: ".form__save",
+  inactiveButtonClass: "form__save_inactive",
+  inputErrorClass: "info_error",
+  errorClass: "info-error_active",
+};
+
+export { initialCards, validationList };
