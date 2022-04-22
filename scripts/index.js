@@ -1,11 +1,11 @@
 import Card from "./Card.js";
 import FormValidator from "./FormValidator.js";
 import { initialCards, validationList } from "./initial-cards.js";
+import { openPopup, popupShowPicture, closePopup } from "./utils.js";
 
 //попапы
 const popupPersonal = document.querySelector(".popup_personal-info");
 const popupAddPicture = document.querySelector(".popup_add-picture");
-const popupShowPicture = document.querySelector(".popup_show-picture");
 
 //кнопки открытия попапов
 const btnOpenProfilePopup = document.querySelector(".profile__change-info");
@@ -38,36 +38,6 @@ const cardTemplate = document.querySelector(".image-card");
 //место для карточек
 const photoGrid = document.querySelector(".photo-grid");
 
-//поля попапа с картинкой
-const popupImage = document.querySelector(".popup__image");
-const popupDescription = document.querySelector(".popup__description");
-
-function closeOnEsc(event) {
-  if (event.key === "Escape") {
-    const popupOpened = document.querySelector(".popup__opened");
-    closePopup(popupOpened);
-  }
-}
-
-function closeOnClick(event) {
-  if (event.target === event.currentTarget) {
-    const popupOpened = document.querySelector(".popup__opened");
-    closePopup(popupOpened);
-  }
-}
-
-function openPopup(popup) {
-  document.addEventListener("keydown", closeOnEsc);
-  popup.addEventListener("click", closeOnClick);
-  popup.classList.add("popup__opened");
-}
-
-function closePopup(popup) {
-  document.removeEventListener("keydown", closeOnEsc);
-  popup.removeEventListener("click", closeOnClick);
-  popup.classList.remove("popup__opened");
-}
-
 function hideErrors(popup) {
   const button = popup.querySelector(".form__save");
   button.classList.add("form__save_inactive");
@@ -99,30 +69,26 @@ function saveInfo(evt) {
   closePopup(popupPersonal);
 }
 
+function generateCardItem(data) {
+  const card = new Card(data, ".image-card");
+  const cardElement = card.generateCard();
+  return cardElement;
+}
 function saveCard(evt) {
   evt.preventDefault();
   const newInfo = {
     name: inputPlaceName.value,
     link: inputPlaceLink.value,
   };
-  const card = new Card(newInfo, ".image-card");
-  const cardElement = card.generateCard();
+  const cardElement = generateCardItem(newInfo);
   photoGrid.prepend(cardElement);
   popupFormImage.reset();
   closePopup(popupAddPicture);
 }
 
-function getImagePopupData(data) {
-  popupImage.src = data.link;
-  popupImage.alt = data.name;
-  popupDescription.textContent = data.name;
-  openPopup(popupShowPicture);
-}
-
 function getCards(data) {
   data.forEach((place) => {
-    const card = new Card(place, ".image-card");
-    const cardElement = card.generateCard();
+    const cardElement = generateCardItem(place);
     photoGrid.append(cardElement);
   });
 }
@@ -134,8 +100,7 @@ btnOpenProfilePopup.addEventListener("click", function () {
 btnOpenAddPicturePopup.addEventListener("click", function () {
   hideErrors(popupAddPicture);
   openPopup(popupAddPicture);
-  const form = popupAddPicture.querySelector(".form");
-  form.reset();
+  popupFormImage.reset();
 });
 btnCloseProfile.addEventListener("click", function () {
   closePopup(popupPersonal);

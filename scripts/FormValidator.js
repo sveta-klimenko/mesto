@@ -66,9 +66,6 @@ export default class FormValidator {
       document.querySelectorAll(this._config.formSelector)
     );
     formList.forEach(() => {
-      this._form.addEventListener("submit", function (evt) {
-        evt.preventDefault();
-      });
       const fieldsetList = Array.from(
         this._form.querySelectorAll(this._config.fieldsetSelector)
       );

@@ -1,3 +1,5 @@
+import { getImagePopupData } from "./utils.js";
+
 export default class Card {
   constructor(data, selector) {
     this._name = data.name;
@@ -15,8 +17,9 @@ export default class Card {
   generateCard() {
     this._element = this._getTemplate();
     this._setEventListeners();
-    this._element.querySelector(".photo-grid__photo").src = this._link;
-    this._element.querySelector(".photo-grid__photo").alt = this._name;
+    const photoGrid = this._element.querySelector(".photo-grid__photo");
+    photoGrid.src = this._link;
+    photoGrid.alt = this._name;
     this._element.querySelector(".photo-grid__title").textContent = this._name;
     return this._element;
   }

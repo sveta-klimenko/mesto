@@ -4,6 +4,6 @@
   border: rgba(0, 0, 0, 0.2) solid 1px;
 }
 
-.form__save:hover {
+.form__save_inactive:hover {
   background-color: #fff;
 }
