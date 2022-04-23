@@ -11,6 +11,8 @@ function getImagePopupData(data) {
 }
 
 function openPopup(popup) {
+  const inputs = popup.querySelectorAll(".info");
+  inputs.forEach((input) => (input.value = ""));
   document.addEventListener("keydown", closeOnEsc);
   popup.addEventListener("click", closeOnClick);
   popup.classList.add("popup__opened");
@@ -32,7 +34,6 @@ function closeOnEsc(event) {
 function closeOnClick(event) {
   const popupOpened = document.querySelector(".popup__opened");
   if (event.target === event.currentTarget) {
-    console.log(popupOpened);
     closePopup(popupOpened);
   }
 }

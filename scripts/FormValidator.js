@@ -48,6 +48,23 @@ export default class FormValidator {
     });
   };
 
+  resetErrors = () => {
+    const button = this._form.querySelector(".form__save");
+    button.classList.add("form__save_inactive");
+    button.setAttribute("disabled", "disabled");
+
+    const inputElements = this._form.querySelectorAll(".info_error");
+    inputElements.forEach((element) => {
+      element.classList.remove("info_error");
+    });
+
+    const errorElements = this._form.querySelectorAll(".info-error_active");
+    errorElements.forEach((element) => {
+      element.classList.remove("info-error_active");
+      element.textContent = "";
+    });
+  };
+
   _toggleButtonState = (inputList, buttonElement) => {
     // Если есть хотя бы один невалидный инпут
     if (this._hasInvalidInput(inputList)) {

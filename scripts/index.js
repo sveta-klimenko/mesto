@@ -38,25 +38,8 @@ const cardTemplate = document.querySelector(".image-card");
 //место для карточек
 const photoGrid = document.querySelector(".photo-grid");
 
-function hideErrors(popup) {
-  const button = popup.querySelector(".form__save");
-  button.classList.add("form__save_inactive");
-  button.setAttribute("disabled", "disabled");
-
-  const inputElements = popup.querySelectorAll(".info_error");
-  inputElements.forEach((element) => {
-    element.classList.remove("info_error");
-  });
-
-  const errorElements = popup.querySelectorAll(".info-error_active");
-  errorElements.forEach((element) => {
-    element.classList.remove("info-error_active");
-    element.textContent = "";
-  });
-}
-
 function getPersonalInfo(popup) {
-  hideErrors(popup);
+  profilePopupValidation.resetErrors();
   openPopup(popup);
   inputName.value = profileName.textContent;
   inputDescription.value = profileDescription.textContent;
@@ -94,14 +77,24 @@ function getCards(data) {
 }
 getCards(initialCards);
 
+const profilePopupValidation = new FormValidator(validationList, popupPersonal);
+profilePopupValidation.enableValidation();
+const popupAddPictureValidation = new FormValidator(
+  validationList,
+  popupAddPicture
+);
+popupAddPictureValidation.enableValidation();
+
 btnOpenProfilePopup.addEventListener("click", function () {
+  profilePopupValidation.resetErrors();
   getPersonalInfo(popupPersonal);
 });
+
 btnOpenAddPicturePopup.addEventListener("click", function () {
-  hideErrors(popupAddPicture);
+  popupAddPictureValidation.resetErrors();
   openPopup(popupAddPicture);
-  popupFormImage.reset();
 });
+
 btnCloseProfile.addEventListener("click", function () {
   closePopup(popupPersonal);
 });
@@ -114,10 +107,3 @@ btnCloseShowPicture.addEventListener("click", function () {
 
 popupProfileForm.addEventListener("submit", saveInfo);
 popupFormImage.addEventListener("submit", saveCard);
-const profilePopupValidation = new FormValidator(validationList, popupPersonal);
-profilePopupValidation.enableValidation();
-const popupAddPictureValidation = new FormValidator(
-  validationList,
-  popupAddPicture
-);
-popupAddPictureValidation.enableValidation();
