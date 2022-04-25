@@ -86,7 +86,6 @@ const popupAddPictureValidation = new FormValidator(
 popupAddPictureValidation.enableValidation();
 
 btnOpenProfilePopup.addEventListener("click", function () {
-  profilePopupValidation.resetErrors();
   getPersonalInfo(popupPersonal);
 });
 

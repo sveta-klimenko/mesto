@@ -2,6 +2,10 @@ export default class FormValidator {
   constructor(config, form) {
     this._config = config;
     this._form = form;
+    this._saveButton = this._form.querySelector(".form__save");
+    this._inputList = Array.from(
+      this._form.querySelectorAll(this._config.inputSelector)
+    );
   }
 
   _showInputError = (inputElement, errorMessage) => {
@@ -27,17 +31,11 @@ export default class FormValidator {
   };
 
   _setEventListeners = () => {
-    const inputList = Array.from(
-      this._form.querySelectorAll(this._config.inputSelector)
-    );
-    const buttonElement = this._form.querySelector(
-      this._config.submitButtonSelector
-    );
-    this._toggleButtonState(inputList, buttonElement);
-    inputList.forEach((inputElement) => {
+    this._toggleButtonState(this._inputList);
+    this._inputList.forEach((inputElement) => {
       inputElement.addEventListener("input", () => {
         this._checkInputValidity(inputElement);
-        this._toggleButtonState(inputList, buttonElement);
+        this._toggleButtonState(this._inputList);
       });
     });
   };
@@ -49,15 +47,10 @@ export default class FormValidator {
   };
 
   resetErrors = () => {
-    const button = this._form.querySelector(".form__save");
-    button.classList.add("form__save_inactive");
-    button.setAttribute("disabled", "disabled");
-
-    const inputElements = this._form.querySelectorAll(".info_error");
-    inputElements.forEach((element) => {
-      element.classList.remove("info_error");
+    this._toggleButtonStateInactive();
+    this._inputList.forEach((inputElement) => {
+      this._hideInputError(inputElement);
     });
-
     const errorElements = this._form.querySelectorAll(".info-error_active");
     errorElements.forEach((element) => {
       element.classList.remove("info-error_active");
@@ -65,16 +58,21 @@ export default class FormValidator {
     });
   };
 
-  _toggleButtonState = (inputList, buttonElement) => {
-    // Если есть хотя бы один невалидный инпут
+  _toggleButtonStateInactive = () => {
+    this._saveButton.classList.add(this._config.inactiveButtonClass);
+    this._saveButton.setAttribute("disabled", "disabled");
+  };
+
+  _toggleButtonStateActive = () => {
+    this._saveButton.classList.remove(this._config.inactiveButtonClass);
+    this._saveButton.removeAttribute("disabled");
+  };
+
+  _toggleButtonState = (inputList) => {
     if (this._hasInvalidInput(inputList)) {
-      // сделай кнопку неактивной
-      buttonElement.classList.add(this._config.inactiveButtonClass);
-      buttonElement.setAttribute("disabled", "disabled");
+      this._toggleButtonStateInactive();
     } else {
-      // иначе сделай кнопку активной
-      buttonElement.classList.remove(this._config.inactiveButtonClass);
-      buttonElement.removeAttribute("disabled");
+      this._toggleButtonStateActive();
     }
   };
 
