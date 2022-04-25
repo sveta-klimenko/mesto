@@ -51,11 +51,6 @@ export default class FormValidator {
     this._inputList.forEach((inputElement) => {
       this._hideInputError(inputElement);
     });
-    const errorElements = this._form.querySelectorAll(".info-error_active");
-    errorElements.forEach((element) => {
-      element.classList.remove("info-error_active");
-      element.textContent = "";
-    });
   };
 
   _toggleButtonStateInactive = () => {
