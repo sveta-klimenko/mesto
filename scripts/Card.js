@@ -1,10 +1,11 @@
 import { getImagePopupData } from "./utils.js";
 
 export default class Card {
-  constructor(data, selector) {
+  constructor(data, selector, handleCardClick) {
     this._name = data.name;
     this._link = data.link;
     this._selector = selector;
+    this._handleCardClick = handleCardClick;
   }
 
   _getTemplate() {
@@ -47,6 +48,6 @@ export default class Card {
 
     this._element
       .querySelector(".photo-grid__photo")
-      .addEventListener("click", () => getImagePopupData(data));
+      .addEventListener("click", () => this._handleCardClick(data));
   }
 }
