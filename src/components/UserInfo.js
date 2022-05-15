@@ -10,8 +10,8 @@ export default class UserInfo {
       description: this._description,
     };
   }
-  setUserInfo({ inputName, inputDescription }) {
-    this._name = inputName;
-    this._description = inputDescription;
+  setUserInfo({ personalName, description }) {
+    this._name = personalName;
+    this._description = description;
   }
 }
