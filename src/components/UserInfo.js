@@ -5,16 +5,13 @@ export default class UserInfo {
   }
 
   getUserInfo() {
-    const personalInfo = {
+    return {
       personalName: this._name,
       description: this._description,
     };
-    return personalInfo;
   }
-  setUserInfo(inputName, inputDescription) {
-    const profileName = document.querySelector(".profile__name");
-    const profileDescription = document.querySelector(".profile__occupation");
-    profileName.textContent = inputName;
-    profileDescription.textContent = inputDescription;
+  setUserInfo({ inputName, inputDescription }) {
+    this._name = inputName;
+    this._description = inputDescription;
   }
 }
