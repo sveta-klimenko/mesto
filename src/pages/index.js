@@ -43,7 +43,6 @@ cardsList.renderItems();
 const userInfo = new UserInfo(".profile__name", ".profile__occupation");
 
 const popupPersonalItem = new PopupWithForm(".popup_personal-info", (data) => {
-  console.log(data);
   userInfo.setUserInfo(data);
 });
 
