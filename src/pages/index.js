@@ -25,16 +25,17 @@ const openPopup = (data) => {
   popupWithImage.open(data);
 };
 
+const generateNewCard = (data) => {
+  const card = new Card(data, ".image-card", openPopup);
+  return card.generateCard();
+};
+
 popupWithImage.setEventListeners();
 
 const cardsList = new Section(
   {
     items: initialCards,
-    renderer: (data) => {
-      const card = new Card(data, ".image-card", openPopup);
-      const cardElement = card.generateCard();
-      cardsList.addItem(cardElement);
-    },
+    renderer: (data) => cardsList.addItem(generateNewCard(data)),
   },
   ".photo-grid"
 );
@@ -62,11 +63,9 @@ btnOpenProfilePopup.addEventListener("click", function () {
   inputDescription.value = info.description;
 });
 
-const popupAddPictureItem = new PopupWithForm(".popup_add-picture", (data) => {
-  const card = new Card(data, ".image-card", openPopup);
-  const cardElement = card.generateCard();
-  cardsList.addNewCard(cardElement);
-});
+const popupAddPictureItem = new PopupWithForm(".popup_add-picture", (data) =>
+  cardsList.addNewCard(generateNewCard(data))
+);
 
 popupAddPictureItem.setEventListeners();
 
