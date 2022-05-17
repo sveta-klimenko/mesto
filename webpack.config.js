@@ -34,7 +34,6 @@ module.exports = {
         // регулярное выражение, которое ищет все файлы с такими расширениями
         test: /\.(png|svg|jpg|gif|woff(2)?|eot|ttf|otf)$/,
         type: "asset/resource",
-        use: "file-loader",
       },
       {
         // применять это правило только к CSS-файлам
