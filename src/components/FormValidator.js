@@ -73,17 +73,12 @@ export default class FormValidator {
     }
   };
 
-  enableValidation = () => {
-    const formList = Array.from(
-      document.querySelectorAll(this._config.formSelector)
-    );
-    formList.forEach(() => {
-      const fieldsetList = Array.from(
-        this._form.querySelectorAll(this._config.fieldsetSelector)
-      );
-      fieldsetList.forEach((fieldset) => {
-        this._setEventListeners(fieldset);
-      });
+  enableValidation() {
+    console.log(this);
+    this._form.addEventListener("submit", (event) => {
+      event.preventDefault();
     });
-  };
+
+    this._setEventListeners();
+  }
 }
