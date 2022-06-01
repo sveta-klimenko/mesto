@@ -10,10 +10,12 @@ import "../styles/index.css";
 //попапы
 const popupPersonal = document.querySelector(".popup_personal-info");
 const popupAddPicture = document.querySelector(".popup_add-picture");
+const popupChangeIcon = document.querySelector(".popup_change-icon");
 
 //кнопки открытия попапов
 const btnOpenProfilePopup = document.querySelector(".profile__change-info");
 const btnOpenAddPicturePopup = document.querySelector(".profile__add-picture");
+const btnOpenChangeIconPopup = document.querySelector(".profile__avatar-edit");
 
 //поля для персональной информации
 const inputName = popupPersonal.querySelector(".info_name");
@@ -41,7 +43,11 @@ const cardsList = new Section(
 );
 cardsList.renderItems();
 
-const userInfo = new UserInfo(".profile__name", ".profile__occupation");
+const userInfo = new UserInfo(
+  ".profile__name",
+  ".profile__occupation",
+  ".profile__avatar"
+);
 
 const popupPersonalItem = new PopupWithForm(".popup_personal-info", (data) => {
   userInfo.setUserInfo(data);
@@ -78,4 +84,21 @@ popupAddPictureValidation.enableValidation();
 btnOpenAddPicturePopup.addEventListener("click", function () {
   popupAddPictureValidation.resetErrors();
   popupAddPictureItem.open();
+});
+
+const popupChangeIconItem = new PopupWithForm(".popup_change-icon", (data) =>
+  userInfo.setIcon(data)
+);
+
+popupChangeIconItem.setEventListeners();
+
+const popupChangeIconValidation = new FormValidator(
+  validationList,
+  popupChangeIcon
+);
+popupChangeIconValidation.enableValidation();
+
+btnOpenChangeIconPopup.addEventListener("click", function () {
+  popupChangeIconValidation.resetErrors();
+  popupChangeIconItem.open();
 });
