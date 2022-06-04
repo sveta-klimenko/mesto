@@ -11,12 +11,11 @@ export default class UserInfo {
       description: this._description.textContent,
     };
   }
-  setUserInfo({ personalName, description }) {
-    this._name.textContent = personalName;
-    this._description.textContent = description;
+  setUserInfo(data) {
+    this._name.textContent = data.name;
+    this._description.textContent = data.about;
   }
   setIcon(data) {
-    debugger;
-    this._icon.src = data.icon;
+    this._icon.src = data.avatar;
   }
 }

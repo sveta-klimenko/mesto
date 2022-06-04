@@ -1,3 +1,4 @@
+import Api from "../components/Api.js";
 import Card from "../components/Card.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import PopupWithImage from "../components/PopupWithImage.js";
@@ -23,6 +24,39 @@ const inputDescription = popupPersonal.querySelector(".info_description");
 
 const popupWithImage = new PopupWithImage(".popup_show-picture");
 
+const userInfo = new UserInfo(
+  ".profile__name",
+  ".profile__occupation",
+  ".profile__avatar"
+);
+
+const api = new Api({
+  url: "https://nomoreparties.co/v1/cohort-42/",
+  headers: {
+    authorization: "7ccf8939-dd66-46c7-841c-93db6f266356",
+    "content-Type": "application/json",
+  },
+});
+
+let myId = "";
+
+api.getPersonalInfo().then((res) => {
+  userInfo.setUserInfo(res);
+  userInfo.setIcon(res);
+  myId = res._id;
+});
+
+api.getCards().then((res) => {
+  const cardsList = new Section(
+    {
+      items: res,
+      renderer: (data) => cardsList.addItem(generateNewCard(data)),
+    },
+    ".photo-grid"
+  );
+  cardsList.renderItems();
+});
+
 const openPopup = (data) => {
   popupWithImage.open(data);
 };
@@ -33,21 +67,6 @@ const generateNewCard = (data) => {
 };
 
 popupWithImage.setEventListeners();
-
-const cardsList = new Section(
-  {
-    items: initialCards,
-    renderer: (data) => cardsList.addItem(generateNewCard(data)),
-  },
-  ".photo-grid"
-);
-cardsList.renderItems();
-
-const userInfo = new UserInfo(
-  ".profile__name",
-  ".profile__occupation",
-  ".profile__avatar"
-);
 
 const popupPersonalItem = new PopupWithForm(".popup_personal-info", (data) => {
   userInfo.setUserInfo(data);
@@ -60,6 +79,10 @@ const popupPersonalValidation = new FormValidator(
   popupPersonal
 );
 popupPersonalValidation.enableValidation();
+
+const popupChangeIconItem = new PopupWithForm(".popup_change-icon", (data) =>
+  userInfo.setIcon(data)
+);
 
 btnOpenProfilePopup.addEventListener("click", function () {
   popupPersonalValidation.resetErrors();
@@ -85,10 +108,6 @@ btnOpenAddPicturePopup.addEventListener("click", function () {
   popupAddPictureValidation.resetErrors();
   popupAddPictureItem.open();
 });
-
-const popupChangeIconItem = new PopupWithForm(".popup_change-icon", (data) =>
-  userInfo.setIcon(data)
-);
 
 popupChangeIconItem.setEventListeners();
 
