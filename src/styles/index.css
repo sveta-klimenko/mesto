@@ -20,6 +20,8 @@
 @import url(../blocks/photo-grid/__trash/photo-grid__trash.css);
 @import url(../blocks/photo-grid/__like/photo-grid__like.css);
 @import url(../blocks/photo-grid/__like/_active/photo-grid__like_active.css);
+@import url(../blocks/photo-grid/__like-area/photo-grid__like-area.css);
+@import url(../blocks/photo-grid/__like-number/photo-grid__like-number.css);
 @import url(../blocks/footer/footer.css);
 @import url(../blocks/footer/__copyright/footer__copyright.css);
 @import url(../blocks/popup/popup.css);

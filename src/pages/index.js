@@ -46,16 +46,24 @@ api.getPersonalInfo().then((res) => {
   myId = res._id;
 });
 
-api.getCards().then((res) => {
-  const cardsList = new Section(
-    {
-      items: res,
-      renderer: (data) => cardsList.addItem(generateNewCard(data)),
-    },
-    ".photo-grid"
-  );
-  cardsList.renderItems();
-});
+const apiGetCards = () => {
+  api.getCards().then((res) => {
+    const cardsList = new Section(
+      {
+        items: res,
+        renderer: (data) => cardsList.addItem(generateNewCard(data)),
+      },
+      ".photo-grid"
+    );
+    cardsList.renderItems();
+  });
+};
+
+apiGetCards();
+
+function ApiUpdatePersonalInfo(data) {
+  api.updatePersonalInfo(data).then((res) => userInfo.setUserInfo(res));
+}
 
 const openPopup = (data) => {
   popupWithImage.open(data);
@@ -68,9 +76,9 @@ const generateNewCard = (data) => {
 
 popupWithImage.setEventListeners();
 
-const popupPersonalItem = new PopupWithForm(".popup_personal-info", (data) => {
-  userInfo.setUserInfo(data);
-});
+const popupPersonalItem = new PopupWithForm(".popup_personal-info", (data) =>
+  ApiUpdatePersonalInfo(data)
+);
 
 popupPersonalItem.setEventListeners();
 

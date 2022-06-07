@@ -43,11 +43,11 @@
       <form class="form form_personal" novalidate>
         <fieldset class="form__info">
           <label class="error-label">
-            <input type="text" class="info info_name" id="name" name="personalName" required minlength="2" maxlength="40">
+            <input type="text" class="info info_name" id="name" name="name" required minlength="2" maxlength="40">
             <span class="error" id="name-error"></span>
           </label>
           <label class="error-label">
-            <input type="text" class="info info_description" id="description" name="description"  required minlength="2" maxlength="200">
+            <input type="text" class="info info_description" id="description" name="about"  required minlength="2" maxlength="200">
             <span class="error" id="description-error"></span>
           </label>
           <button class="form__save" type="submit">Сохранить</button>
@@ -118,7 +118,10 @@
       <button class="photo-grid__trash" aria-label="Удалить изображение"></button>
       <div class="photo-grid__info">
         <h2 class="photo-grid__title"></h2>
-        <button class="photo-grid__like" aria-label="Добавить изображение в избранные"></button>
+        <div class="photo-grid__like-area">
+          <button class="photo-grid__like" aria-label="Добавить изображение в избранные"></button>
+          <p class="photo-grid__like-number">0</p>
+        </div>
     </div>
     </li>
   </template>

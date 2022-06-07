@@ -7,6 +7,8 @@ export default class Card {
     this._selector = selector;
     this._myId = myId;
     this._handleCardClick = handleCardClick;
+    this._isLiked = false;
+    debugger;
   }
 
   _getTemplate() {
@@ -19,6 +21,8 @@ export default class Card {
   generateCard() {
     this._element = this._getTemplate();
     this._setEventListeners();
+    this._setLikesNumber();
+    this._checkIsLiked();
     const photoGrid = this._element.querySelector(".photo-grid__photo");
     photoGrid.src = this._link;
     photoGrid.alt = this._name;
@@ -26,8 +30,31 @@ export default class Card {
     return this._element;
   }
 
+  _setLikesNumber() {
+    const likes = this._element.querySelector(".photo-grid__like-number");
+    likes.textContent = this._likes.length;
+  }
+
+  _checkIsLiked() {
+    if (this._likes[0] && this._likes[0]._id == this._myId) {
+      console.log("Эта карточка лайкнута мной");
+      this._addLikeBtn();
+      this._isLiked = true;
+    }
+  }
+
   _toggleLikeBtn(evt) {
     evt.target.classList.toggle("photo-grid__like_active");
+  }
+
+  _addLikeBtn(evt) {
+    evt.target.classList.add("photo-grid__like_active");
+    this._isLiked = true;
+  }
+
+  _removeLikeBtn(evt) {
+    evt.target.classList.remove("photo-grid__like_active");
+    this._isLiked = false;
   }
 
   _deleteCard(evt) {
@@ -46,7 +73,7 @@ export default class Card {
       link: this._link,
       name: this._name,
     };
-
+    debugger;
     this._element
       .querySelector(".photo-grid__photo")
       .addEventListener("click", () => this._handleCardClick(data));
