@@ -89,6 +89,7 @@ function ApiUpdatePersonalInfo(data) {
 }
 
 function ApiUpdateAvatar(data) {
+  console.log(data);
   api
     .updateAvatar(data)
     .then((res) => userInfo.setIcon(res))
@@ -106,19 +107,17 @@ function ApiDeleteCard(card) {
 }
 
 function ApiLikeCard(card) {
-  console.log("апи лайк");
-  console.log(card);
   api
     .likeCard(card._cardId)
-    .then((res) => card.toggleLikeBtn(res.likes.length));
+    .then((res) => card.toggleLikeBtn(res.likes.length))
+    .catch((err) => console.log(err));
 }
 
 function ApiDislikeCard(card) {
-  console.log("апи дизлайк");
-  console.log(card);
   api
     .dislikeCard(card._cardId)
-    .then((res) => card.toggleLikeBtn(res.likes.length));
+    .then((res) => card.toggleLikeBtn(res.likes.length))
+    .catch((err) => console.log(err));
 }
 
 const openImagePopup = (data) => {

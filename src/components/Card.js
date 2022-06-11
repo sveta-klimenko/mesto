@@ -48,13 +48,14 @@ export default class Card {
   }
 
   _checkIsLiked() {
-    if (this._likes[0] && this._likes[0]._id == this._myId) {
-      console.log("Эта карточка лайкнута мной");
-      this._element
-        .querySelector(".photo-grid__like")
-        .classList.add("photo-grid__like_active");
-      this._isLiked = true;
-    }
+    this._likes.forEach((like) => {
+      if (like._id == this._myId) {
+        this._element
+          .querySelector(".photo-grid__like")
+          .classList.add("photo-grid__like_active");
+        this._isLiked = true;
+      }
+    });
   }
 
   _addDeleteBtn() {
@@ -67,22 +68,20 @@ export default class Card {
     }
   }
 
-  toggleLikeBtn() {
+  toggleLikeBtn(value) {
     this._isLiked = !this._isLiked;
-    console.log(this._templateCopy);
-    this._templateCopy
+    this._element
       .querySelector(".photo-grid__like")
       .classList.toggle("photo-grid__like_active");
+    this._element.querySelector(".photo-grid__like-number").textContent = value;
   }
 
   deleteCard() {
-    console.log("удаляю");
-    console.log(this._templateCopy);
-    this._templateCopy.remove();
+    this._element.remove();
   }
 
   _setEventListeners() {
-    this._templateCopy = this._element
+    this._element = this._element
       .querySelector(".photo-grid__element")
       .cloneNode(true);
     this._element
