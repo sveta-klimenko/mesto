@@ -24,12 +24,9 @@ const inputName = popupPersonal.querySelector(".info_name");
 const inputDescription = popupPersonal.querySelector(".info_description");
 
 const popupWithImage = new PopupWithImage(".popup_show-picture");
-const popupAddPictureItem = new PopupWithForm(".popup_add-picture", (data) => {
-  api
-    .createCard(data)
-    .then((res) => cardsList.addNewCard(generateNewCard(res)))
-    .catch((err) => console.log(err));
-});
+const popupAddPictureItem = new PopupWithForm(".popup_add-picture", (data) =>
+  ApiAddNewCard(data)
+);
 const popupChangeIconItem = new PopupWithForm(".popup_change-icon", (data) =>
   ApiUpdateAvatar(data)
 );
@@ -61,30 +58,41 @@ const cardsList = new Section(
   ".photo-grid"
 );
 
-const apiGetCards = () => {
-  api
-    .getCards()
-    .then((res) => cardsList.renderItems(res))
+let myId = "";
+
+const apiGetStartInfo = () => {
+  Promise.all([api.getCards(), api.getPersonalInfo()])
+    .then((res) => {
+      const [cardData, PersonalInfoData] = res;
+      cardsList.renderItems(cardData);
+      userInfo.setUserInfo(PersonalInfoData);
+      userInfo.setIcon(PersonalInfoData);
+      myId = res._id;
+    })
     .catch((err) => console.log(err));
 };
 
-apiGetCards();
+apiGetStartInfo();
 
-let myId = "";
-
-api
-  .getPersonalInfo()
-  .then((res) => {
-    userInfo.setUserInfo(res);
-    userInfo.setIcon(res);
-    myId = res._id;
-  })
-  .catch((err) => console.log(err));
+function ApiAddNewCard(data) {
+  api
+    .createCard(data)
+    .then((res) => {
+      cardsList.addNewCard(generateNewCard(res));
+      popupAddPictureItem.close();
+      popupAddPicture.handleLoading(false);
+    })
+    .catch((err) => console.log(err));
+}
 
 function ApiUpdatePersonalInfo(data) {
   api
     .updatePersonalInfo(data)
-    .then((res) => userInfo.setUserInfo(res))
+    .then((res) => {
+      userInfo.setUserInfo(res);
+      popupPersonalItem.close();
+      popupPersonalItem.handleLoading(false);
+    })
     .catch((err) => console.log(err));
 }
 
@@ -92,16 +100,22 @@ function ApiUpdateAvatar(data) {
   console.log(data);
   api
     .updateAvatar(data)
-    .then((res) => userInfo.setIcon(res))
+    .then((res) => {
+      userInfo.setIcon(res);
+      popupChangeIconItem.close();
+      popupChangeIconItem.handleLoading(false);
+    })
     .catch((err) => console.log(err));
 }
 
 function ApiDeleteCard(card) {
+  popupDeleteCard.handleLoading(true);
   api
     .deleteCard(card._cardId)
     .then(() => {
       card.deleteCard();
       popupDeleteCard.close();
+      popupDeleteCard.handleLoading(false);
     })
     .catch((err) => console.log(err));
 }

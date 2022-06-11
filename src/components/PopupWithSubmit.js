@@ -5,6 +5,14 @@ export default class PopupWithSubmit extends Popup {
     super(popupSelector);
     this._handlerSubmit = handlerSubmit;
     this._form = this._popup.querySelector(".form");
+    this._popupBtn = this._popup.querySelector(".form__save");
+    this._popupBtnInitialText = this._popupBtn.textContent;
+  }
+
+  handleLoading(isLoading) {
+    this._popupBtn.textContent = isLoading
+      ? "Удаление..."
+      : this._popupBtnInitialText;
   }
 
   open(card) {
