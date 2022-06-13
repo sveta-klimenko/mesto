@@ -18,6 +18,7 @@
 .photo-grid__info{display:flex;justify-content:space-between;padding:25px 15px 31px 21px}
 .photo-grid__title{color:#000;display:block;font-size:24px;font-weight:900;line-height:29px;margin:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;width:200px}
 .photo-grid__trash{background-color:transparent;background-image:url(cbc09a894bdd4c956365.svg);border:none;cursor:pointer;height:19px;position:absolute;right:20px;top:20px;width:18px}.photo-grid__trash:hover{opacity:.5;transition:opacity .3s ease-in-out}
+.photo-grid__trash-hidden{opacity:0}
 .photo-grid__like{background-color:transparent;background-image:url(87ed371465c7a6a1cd01.svg);border:none;cursor:pointer;height:19px;margin-top:5px;width:22px}.photo-grid__like:hover{opacity:.5;transition:opacity .3s ease-in-out}
 .photo-grid__like_active{background-image:url(fe17a515669479b1e649.svg);cursor:pointer;height:19px;width:22px}
 .photo-grid__like-area{display:flex;flex-direction:column}
