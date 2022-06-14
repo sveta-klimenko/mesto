@@ -2,9 +2,7 @@ export default class FormValidator {
   constructor(config, form) {
     this._config = config;
     this._form = form;
-    this._saveButton = this._form.querySelector(
-      this._config.submitButtonSelector
-    );
+    this._btnSave = this._form.querySelector(this._config.submitButtonSelector);
     this._inputList = Array.from(
       this._form.querySelectorAll(this._config.inputSelector)
     );
@@ -56,13 +54,13 @@ export default class FormValidator {
   };
 
   _toggleButtonStateInactive = () => {
-    this._saveButton.classList.add(this._config.inactiveButtonClass);
-    this._saveButton.setAttribute("disabled", "disabled");
+    this._btnSave.classList.add(this._config.inactiveButtonClass);
+    this._btnSave.setAttribute("disabled", "disabled");
   };
 
   _toggleButtonStateActive = () => {
-    this._saveButton.classList.remove(this._config.inactiveButtonClass);
-    this._saveButton.removeAttribute("disabled");
+    this._btnSave.classList.remove(this._config.inactiveButtonClass);
+    this._btnSave.removeAttribute("disabled");
   };
 
   _toggleButtonState = (inputList) => {
@@ -74,10 +72,6 @@ export default class FormValidator {
   };
 
   enableValidation() {
-    this._form.addEventListener("submit", (event) => {
-      event.preventDefault();
-    });
-
     this._setEventListeners();
   }
 }

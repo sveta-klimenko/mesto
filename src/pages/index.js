@@ -4,7 +4,7 @@ import PopupWithForm from "../components/PopupWithForm.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import PopupWithSubmit from "../components/PopupWithSubmit.js";
 import FormValidator from "../components/FormValidator.js";
-import { validationList } from "../components/initial-cards.js";
+import { validationList } from "../utils/initial-cards.js";
 import Section from "../components/Section.js";
 import UserInfo from "../components/UserInfo.js";
 import "../styles/index.css";
@@ -25,16 +25,16 @@ const inputDescription = popupPersonal.querySelector(".info_description");
 
 const popupWithImage = new PopupWithImage(".popup_show-picture");
 const popupAddPictureItem = new PopupWithForm(".popup_add-picture", (data) =>
-  ApiAddNewCard(data)
+  addNewCardApi(data)
 );
 const popupChangeIconItem = new PopupWithForm(".popup_change-icon", (data) =>
-  ApiUpdateAvatar(data)
+  updateAvatarApi(data)
 );
 const popupPersonalItem = new PopupWithForm(".popup_personal-info", (data) =>
-  ApiUpdatePersonalInfo(data)
+  updatePersonalInfoApi(data)
 );
 const popupDeleteCard = new PopupWithSubmit(".popup_delete", (data) =>
-  ApiDeleteCard(data)
+  deleteCardApi(data)
 );
 
 const userInfo = new UserInfo(
@@ -60,74 +60,73 @@ const cardsList = new Section(
 
 let myId = "";
 
-const apiGetStartInfo = () => {
+const getStartInfoApi = () => {
   Promise.all([api.getCards(), api.getPersonalInfo()])
     .then((res) => {
       const [cardData, PersonalInfoData] = res;
+      myId = PersonalInfoData._id;
       cardsList.renderItems(cardData);
       userInfo.setUserInfo(PersonalInfoData);
       userInfo.setIcon(PersonalInfoData);
-      myId = res._id;
     })
     .catch((err) => console.log(err));
 };
 
-apiGetStartInfo();
+getStartInfoApi();
 
-function ApiAddNewCard(data) {
+function addNewCardApi(data) {
   api
     .createCard(data)
     .then((res) => {
       cardsList.addNewCard(generateNewCard(res));
       popupAddPictureItem.close();
-      popupAddPicture.handleLoading(false);
     })
-    .catch((err) => console.log(err));
+    .catch((err) => console.log(err))
+    .finally(() => popupAddPictureItem.handleLoading(false));
 }
 
-function ApiUpdatePersonalInfo(data) {
+function updatePersonalInfoApi(data) {
   api
     .updatePersonalInfo(data)
     .then((res) => {
       userInfo.setUserInfo(res);
       popupPersonalItem.close();
-      popupPersonalItem.handleLoading(false);
     })
-    .catch((err) => console.log(err));
+    .catch((err) => console.log(err))
+    .finally(() => popupPersonalItem.handleLoading(false));
 }
 
-function ApiUpdateAvatar(data) {
-  console.log(data);
+function updateAvatarApi(data) {
   api
     .updateAvatar(data)
     .then((res) => {
       userInfo.setIcon(res);
       popupChangeIconItem.close();
-      popupChangeIconItem.handleLoading(false);
     })
-    .catch((err) => console.log(err));
+    .catch((err) => console.log(err))
+    .finally(() => popupChangeIconItem.handleLoading(false));
 }
 
-function ApiDeleteCard(card) {
+function deleteCardApi(card) {
   popupDeleteCard.handleLoading(true);
   api
     .deleteCard(card._cardId)
     .then(() => {
       card.deleteCard();
       popupDeleteCard.close();
-      popupDeleteCard.handleLoading(false);
     })
-    .catch((err) => console.log(err));
+    .catch((err) => console.log(err))
+    .finally(() => popupDeleteCard.handleLoading(false));
 }
 
-function ApiLikeCard(card) {
+function likeCardApi(card) {
   api
     .likeCard(card._cardId)
     .then((res) => card.toggleLikeBtn(res.likes.length))
     .catch((err) => console.log(err));
 }
 
-function ApiDislikeCard(card) {
+function dislikeCardApi(card) {
   api
     .dislikeCard(card._cardId)
     .then((res) => card.toggleLikeBtn(res.likes.length))
@@ -149,8 +148,8 @@ const generateNewCard = (data) => {
     myId,
     openImagePopup,
     () => openDeletePopup(card),
-    () => ApiLikeCard(card),
-    () => ApiDislikeCard(card)
+    () => likeCardApi(card),
+    () => dislikeCardApi(card)
   );
   return card.generateCard();
 };

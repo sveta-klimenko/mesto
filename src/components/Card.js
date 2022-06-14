@@ -20,6 +20,11 @@ export default class Card {
     this._handleLikeItem = handleLikeItem;
     this._handleDislikeItem = handleDislikeItem;
     this._isLiked = false;
+    this._element = this._getTemplate().querySelector(".photo-grid__element");
+    this._photoGrid = this._element.querySelector(".photo-grid__photo");
+    this._like = this._element.querySelector(".photo-grid__like");
+    this._deleteBtn = this._element.querySelector(".photo-grid__trash");
+    this._likesNumber = this._element.querySelector(".photo-grid__like-number");
   }
 
   _getTemplate() {
@@ -30,12 +35,10 @@ export default class Card {
   }
 
   generateCard() {
-    this._element = this._getTemplate();
     this._setLikesNumber();
     this._checkIsLiked();
-    const photoGrid = this._element.querySelector(".photo-grid__photo");
-    photoGrid.src = this._link;
-    photoGrid.alt = this._name;
+    this._photoGrid.src = this._link;
+    this._photoGrid.alt = this._name;
     this._addDeleteBtn();
     this._element.querySelector(".photo-grid__title").textContent = this._name;
     this._setEventListeners();
@@ -43,37 +46,29 @@ export default class Card {
   }
 
   _setLikesNumber() {
-    const likes = this._element.querySelector(".photo-grid__like-number");
-    likes.textContent = this._likes.length;
+    this._likesNumber.textContent = this._likes.length;
   }
 
   _checkIsLiked() {
     this._likes.forEach((like) => {
-      if (like._id == this._myId) {
-        this._element
-          .querySelector(".photo-grid__like")
-          .classList.add("photo-grid__like_active");
+      if (like._id === this._myId) {
+        this._like.classList.add("photo-grid__like_active");
         this._isLiked = true;
       }
     });
   }
 
   _addDeleteBtn() {
-    const card = this._element.querySelector(".photo-grid__element");
-    if (this._ownerId == this._myId) {
-      const deleteBtn = document.createElement("button");
-      deleteBtn.classList.add("photo-grid__trash");
-      deleteBtn.ariaLabel = "Удалить изображение";
-      card.appendChild(deleteBtn);
+    if (this._ownerId != this._myId) {
+      this._deleteBtn.classList.add("photo-grid__trash-hidden");
+      this._deleteBtn.setAttribute("disabled", "disabled");
     }
   }
 
   toggleLikeBtn(value) {
     this._isLiked = !this._isLiked;
-    this._element
-      .querySelector(".photo-grid__like")
-      .classList.toggle("photo-grid__like_active");
-    this._element.querySelector(".photo-grid__like-number").textContent = value;
+    this._like.classList.toggle("photo-grid__like_active");
+    this._likesNumber.textContent = value;
   }
 
   deleteCard() {
@@ -81,30 +76,21 @@ export default class Card {
   }
 
   _setEventListeners() {
-    this._element = this._element
-      .querySelector(".photo-grid__element")
-      .cloneNode(true);
-    this._element
-      .querySelector(".photo-grid__like")
-      .addEventListener("click", () => {
-        if (this._isLiked) {
-          this._handleDislikeItem();
-        } else {
-          this._handleLikeItem();
-        }
-      });
-    if (this._element.querySelector(".photo-grid__trash") != null) {
-      this._element
-        .querySelector(".photo-grid__trash")
-        .addEventListener("click", () => this._handleDeleteItem());
-    }
+    this._like.addEventListener("click", () => {
+      if (this._isLiked) {
+        this._handleDislikeItem();
+      } else {
+        this._handleLikeItem();
+      }
+    });
+    this._deleteBtn.addEventListener("click", () => this._handleDeleteItem());
 
     const data = {
       link: this._link,
       name: this._name,
     };
-    this._element
-      .querySelector(".photo-grid__photo")
-      .addEventListener("click", () => this._handleCardClick(data));
+    this._photoGrid.addEventListener("click", () =>
+      this._handleCardClick(data)
+    );
   }
 }
